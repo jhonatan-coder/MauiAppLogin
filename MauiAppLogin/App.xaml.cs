@@ -7,11 +7,19 @@ namespace MauiAppLogin
         public App()
         {
             InitializeComponent();
+            // Não use mais: MainPage = new AppShell();
+
         }
 
         protected override Window CreateWindow(IActivationState? activationState)
         {
-            return new Window(new AppShell());
+            // Inicialize a janela com a Page raiz aqui
+            var window = new Window(new AppShell());
+
+            window.Width = 400;
+            window.Height = 700;
+
+            return window;
         }
     }
 }
