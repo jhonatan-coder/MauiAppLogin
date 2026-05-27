@@ -1,5 +1,4 @@
-﻿using Microsoft.Extensions.DependencyInjection;
-
+﻿
 namespace MauiAppLogin
 {
     public partial class App : Application
@@ -7,29 +6,33 @@ namespace MauiAppLogin
         public App()
         {
             InitializeComponent();
+
+            
         }
 
+        // Sobrescreve o método CreateWindow para definir a página inicial do aplicativo
         protected override Window CreateWindow(IActivationState? activationState)
-        {
-            Page paginaInicial;
-
+      {
             string? usuarioLogado = SecureStorage.Default.GetAsync("usuarioLogado").Result;
+            Page paginaInicial;
             if (usuarioLogado == null)
             {
-                paginaInicial = new Login();
+                paginaInicial = new Login(); // Se não houver usuário logado, a página inicial será a de login
             }
             else
             {
-                paginaInicial = new Protegida();
+                paginaInicial = new Protegida(); // Se houver um usuário logado, a página inicial será a protegida
             }
-            // Inicialize a janela com a Page raiz aqui
-            var window = new Window(paginaInicial);
 
+            // paginaInicial vai receber a pagina de login como pagina inicial do aplicativo
 
-            window.Width = 400;
-            window.Height = 700;
+            var Window = new Window(paginaInicial);
 
-            return window;
+            Window.Width = 400;
+            Window.Height = 700;
+
+            return Window;
+
         }
     }
 }
